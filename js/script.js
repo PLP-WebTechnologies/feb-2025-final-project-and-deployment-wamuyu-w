@@ -9,31 +9,38 @@ navToggle.addEventListener('click', () => {
 });
 
 // Announcement Slider
-const slides = document.querySelectorAll('.slide');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-let currentSlide = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let currentSlide = 0;
 
-function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
-}
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    }
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
 
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-}
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
 
-prevButton.addEventListener('click', prevSlide);
-nextButton.addEventListener('click', nextSlide);
+    if (prevButton && nextButton && slides.length > 0) {
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
 
-// Auto advance slides every 5 seconds
-setInterval(nextSlide, 5000);
+        // Auto advance slides every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Ensure first slide is shown
+        showSlide(0);
+    }
+});
 
 // Animated Counters
 const counters = document.querySelectorAll('.counter');
@@ -57,7 +64,7 @@ function animateCounter(counter) {
     updateCount();
 }
 
-// Intersection Observer for counter animation
+//  function to handle counter animation
 const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -73,7 +80,7 @@ counters.forEach(counter => counterObserver.observe(counter));
 const scrollTopBtn = document.getElementById('scroll-top');
 
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
+    if (window.scrollY > 300) {
         scrollTopBtn.style.display = 'flex';
     } else {
         scrollTopBtn.style.display = 'none';
@@ -87,7 +94,7 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// Smooth Scrolling for Navigation Links
+//Navgation Link Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -103,26 +110,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add active class to nav links based on scroll position
-const sections = document.querySelectorAll('section[id]');
-
-function highlightNavLink() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-
-        if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
-            navLink.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', highlightNavLink);
 
 // Add animation class to feature cards on scroll
 const featureCards = document.querySelectorAll('.feature-card');

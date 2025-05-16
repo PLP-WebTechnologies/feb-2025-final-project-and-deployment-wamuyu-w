@@ -4,22 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michelle's Cookies- Home</title>
+    <meta name="description" content="Michelle's Cookies - Home of delicious cookies, cakes, and sweet treats in Nairobi">
+    <title>Michelle's Cookies - Home</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
+    <nav class="navbar" role="navigation">
         <div class="nav-brand">
-            <i class="fas fa-cookie-bite"></i>
+            <i class="fas fa-cookie-bite" aria-hidden="true"></i>
             <span>Michelle's Cookies</span>
         </div>
-        <button class="nav-toggle" aria-label="toggle navigation">
+        <button class="nav-toggle" aria-label="toggle navigation" aria-expanded="false">
             <span class="hamburger"></span>
         </button>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="index.html" class="active" aria-current="page">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -39,44 +40,43 @@
         <section id="features" class="features">
             <h2>Our Products</h2>
             <div class="features-grid">
-                <div class="feature-card" data-aos="fade-up">
-                    <img src="/assets/icons8-cookies-66.png" alt="Cookies">
+                <article class="feature-card" data-aos="fade-up">
+                    <img src="/assets/icons8-cookies-66.png" alt="Cookies" width="66" height="66">
                     <h3>Cookies</h3>
                     <p>Sweet and crunchy treats for every occasion.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="/assets/icons8-donuts-64.png" alt="Cookies">
-
+                </article>
+                <article class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/assets/icons8-donuts-64.png" alt="Donuts" width="64" height="64">
                     <h3>Donuts</h3>
                     <p>With delicious toppings and fillings.</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="/assets/icons8-cake-64.png" alt="Cookies">
+                </article>
+                <article class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="/assets/icons8-cake-64.png" alt="Cakes" width="64" height="64">
                     <h3>Cakes</h3>
                     <p>Whether it's a birthday cake or a wedding cake, we've got you covered.</p>
-                </div>
+                </article>
             </div>
         </section>
 
-        <section class="announcements">
+        <section class="announcements" aria-label="Announcements">
             <h2>Our latest sweet treats</h2>
             <div class="announcement-slider">
-                <div class="slides">
-                    <div class="slide active">
-                        <h3>Chocolate Fudge Cookies</h3>
+                <div class="slides" role="region" aria-label="Announcement Slides">
+                    <article class="slide active" role="tabpanel" aria-labelledby="slide1">
+                        <h3 id="slide1">Chocolate Fudge Cookies</h3>
                         <p>Delicious and divine, with chocolate oozing through it</p>
                         <span class="date">January 15, 2024</span>
-                    </div>
-                    <div class="slide">
-                        <h3>Crumbl Box Cookies </h3>
+                    </article>
+                    <article class="slide" role="tabpanel" aria-labelledby="slide2">
+                        <h3 id="slide2">Crumbl Box Cookies</h3>
                         <p>A Box of delectable cookies, with an assortment of flavors for you to try out</p>
                         <span class="date">February 10, 2024</span>
-                    </div>
-                    <div class="slide">
-                        <h3>Michelle's Cookie Delight Box</h3>
-                        <p>Perfect for sampling, comes with three cookie,donut and cake flavors</p>
+                    </article>
+                    <article class="slide" role="tabpanel" aria-labelledby="slide3">
+                        <h3 id="slide3">Michelle's Cookie Delight Box</h3>
+                        <p>Perfect for sampling, comes with three cookie, donut and cake flavors</p>
                         <span class="date">March 5, 2024</span>
-                    </div>
+                    </article>
                 </div>
                 <div class="slider-controls">
                     <button class="prev" aria-label="Previous slide">❮</button>
@@ -84,43 +84,44 @@
                 </div>
             </div>
         </section>
+    </main>
 
-
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Kilimani Mall, Nairobi County</p>
-                    <p><i class="fas fa-phone"></i> +254 712 345 678</p>
-                    <p><i class="fas fa-envelope"></i> alex@michellescookies.com</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <address>
+                    <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Kilimani Mall, Nairobi County</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+254712345678">+254 712 345 678</a></p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:alex@michellescookies.com">alex@michellescookies.com</a></p>
+                </address>
+            </div>
+            <nav class="footer-section" aria-label="Footer Navigation">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Visit our Facebook page"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Michelle's Cookies. All rights reserved.</p>
-            </div>
-        </footer>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Michelle's Cookies. All rights reserved.</p>
+        </div>
+    </footer>
 
-        <button id="scroll-top" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
+    <button id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-        <script src="/js/main.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>
