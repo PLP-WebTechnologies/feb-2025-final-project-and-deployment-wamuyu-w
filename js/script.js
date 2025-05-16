@@ -1,23 +1,31 @@
-// Mobile Navigation
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
+// Mobile Menu
+const menuToggle = document.querySelector('.nav-toggle');
+const menuLinks = document.querySelector('.menu-links');
 const hamburger = document.querySelector('.hamburger');
 
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+menuToggle.addEventListener('click', () => {
+    menuLinks.classList.toggle('active');
     hamburger.classList.toggle('active');
 });
 
-// Announcement Slider
+// Treats Slideshow
 document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slide');
     const prevButton = document.querySelector('.prev');
     const nextButton = document.querySelector('.next');
     let currentSlide = 0;
+    let slideInterval;
 
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.opacity = '0';
+        });
         slides[index].classList.add('active');
+        // Fade in effect
+        setTimeout(() => {
+            slides[index].style.opacity = '1';
+        }, 50);
     }
 
     function nextSlide() {
@@ -30,16 +38,102 @@ document.addEventListener('DOMContentLoaded', () => {
         showSlide(currentSlide);
     }
 
+    function startSlideshow() {
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function pauseSlideshow() {
+        clearInterval(slideInterval);
+    }
+
     if (prevButton && nextButton && slides.length > 0) {
-        prevButton.addEventListener('click', prevSlide);
-        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', () => {
+            prevSlide();
+            pauseSlideshow();
+            startSlideshow();
+        });
 
-        // Auto advance slides every 5 seconds
-        setInterval(nextSlide, 5000);
+        nextButton.addEventListener('click', () => {
+            nextSlide();
+            pauseSlideshow();
+            startSlideshow();
+        });
 
-        // Ensure first slide is shown
+        // Start automatic slideshow
+        startSlideshow();
+
+        // Pause slideshow when hovering over it
+        const treatSlider = document.querySelector('.treats-slider');
+        treatSlider.addEventListener('mouseenter', pauseSlideshow);
+        treatSlider.addEventListener('mouseleave', startSlideshow);
+
+        // Ensure first slide is shown with fade effect
         showSlide(0);
     }
+});
+
+// Treat Card Animations
+const treatCards = document.querySelectorAll('.treat-card');
+
+const treatObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(20px)';
+
+            // Trigger a reflow
+            entry.target.offsetHeight;
+
+            // Add animation
+            entry.target.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+
+            treatObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+
+treatCards.forEach(card => treatObserver.observe(card));
+
+// Smooth Scroll to Top
+const scrollTopBtn = document.getElementById('scroll-top');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollTopBtn.style.display = 'flex';
+        scrollTopBtn.style.opacity = '1';
+    } else {
+        scrollTopBtn.style.opacity = '0';
+        setTimeout(() => {
+            if (scrollTopBtn.style.opacity === '0') {
+                scrollTopBtn.style.display = 'none';
+            }
+        }, 300);
+    }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Smooth Scroll Navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close mobile menu if open
+            menuLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
 });
 
 // Animated Counters
@@ -75,41 +169,6 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 counters.forEach(counter => counterObserver.observe(counter));
-
-// Scroll to Top Button
-const scrollTopBtn = document.getElementById('scroll-top');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        scrollTopBtn.style.display = 'flex';
-    } else {
-        scrollTopBtn.style.display = 'none';
-    }
-});
-
-scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-//Navgation Link Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-            // Close mobile menu if open
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
-});
-
 
 // Add animation class to feature cards on scroll
 const featureCards = document.querySelectorAll('.feature-card');
